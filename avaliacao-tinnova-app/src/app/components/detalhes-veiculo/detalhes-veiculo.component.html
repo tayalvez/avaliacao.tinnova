@@ -1,0 +1,18 @@
+<div *ngIf="veiculo">
+  <div>
+    <label>Name: </label> {{veiculo.modelo}}
+  </div>
+  <div>
+    <label>Age: </label> {{veiculo.marca}}
+  </div>
+  <div>
+    <label>Active: </label> {{veiculo.ano}}
+  </div>
+  <div>
+    <label>Active: </label> {{veiculo.vendido}}
+  </div>
+
+  <span class="button is-small btn-danger" (click)='deleteVeiculo(veiculo)'>Delete</span>
+
+  <hr/>
+</div>
