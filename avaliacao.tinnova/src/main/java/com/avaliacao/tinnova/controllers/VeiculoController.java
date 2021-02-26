@@ -1,8 +1,10 @@
 package com.avaliacao.tinnova.controllers;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;  
-import org.springframework.web.bind.annotation.CrossOrigin;  
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;  
 import org.springframework.web.bind.annotation.GetMapping;  
 import org.springframework.web.bind.annotation.PathVariable;  
@@ -23,40 +25,46 @@ public class VeiculoController {
 
     @CrossOrigin
     @RequestMapping ("saveVeiculo")
-    public boolean saveStudent(@RequestBody Veiculo veiculo) {  
-         return veiculoService.saveVeiculo(veiculo);  
-          
+    public ResponseEntity saveStudent(@RequestBody Veiculo veiculo) {
+         veiculoService.saveVeiculo(veiculo);
+         return new ResponseEntity(HttpStatus.OK);
     }
+
     @CrossOrigin
     @GetMapping("veiculos")
-    public List<Veiculo> allVeiculos() {  
-         return veiculoService.getVeiculos();  
+    public ResponseEntity<List<Veiculo>> allVeiculos() {
+         List<Veiculo> veiculos = veiculoService.getVeiculos();
+         return new ResponseEntity<List<Veiculo>>(veiculos, HttpStatus.OK);
           
     }
     @CrossOrigin
     @DeleteMapping("deletarVeiculo/{id}")
-    public boolean deleteStudent(@PathVariable("id") long id,Veiculo veiculo) {  
+    public ResponseEntity deleteVeiculo(@PathVariable("id") long id,Veiculo veiculo) {
     	veiculo.setId(id);  
-        return veiculoService.deleteVeiculo(veiculo);  
+        veiculoService.deleteVeiculo(veiculo);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @CrossOrigin
     @GetMapping("veiculo/{id}")  
-    public List<Veiculo> getVeiculoByID(@PathVariable("id") long id) {
-         return veiculoService.getVeiculoByID(id);
+    public ResponseEntity<Veiculo> getVeiculoByID(@PathVariable("id") long id) {
+        Veiculo veiculo = veiculoService.getVeiculoByID(id);
+        return new ResponseEntity<Veiculo>(veiculo, HttpStatus.OK);
     }
 
     @CrossOrigin
     @PostMapping("updateVeiculo/{id}")  
-    public boolean updateVeiculo(@RequestBody Veiculo veiculo,@PathVariable("id") long id) {
+    public ResponseEntity updateVeiculo(@RequestBody Veiculo veiculo,@PathVariable("id") long id) {
         veiculo.setId(id);  
-        return veiculoService.updateVeiculo(veiculo);  
+        veiculoService.updateVeiculo(veiculo);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @CrossOrigin
     @RequestMapping("getQtdVeiculosNaoVendidos")
-    public int getQtdVeiculosNaoVendidos() {
-        return veiculoService.getQtdVeiculosNaoVendidos();
+    public ResponseEntity<Integer> getQtdVeiculosNaoVendidos() {
+        int qtdNaoVendidos = veiculoService.getQtdVeiculosNaoVendidos();
+        return new ResponseEntity<Integer>(qtdNaoVendidos, HttpStatus.OK);
     }
 
 }

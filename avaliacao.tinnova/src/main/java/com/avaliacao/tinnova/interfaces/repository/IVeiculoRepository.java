@@ -9,7 +9,7 @@ public interface IVeiculoRepository {
 	public boolean save(Veiculo veiculo);  
     public List<Veiculo> getVeiculos();  
     public boolean delete(Veiculo veiculo);  
-    public List<Veiculo> getVeiculoByID(long id);
+    public Veiculo getVeiculoByID(long id);
     public List<Veiculo> getVeiculosNaoVendidos();
     public boolean update(Veiculo veiculo);
 

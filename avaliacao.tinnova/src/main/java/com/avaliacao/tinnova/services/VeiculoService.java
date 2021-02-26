@@ -1,6 +1,7 @@
 package com.avaliacao.tinnova.services;
 
-import java.util.List;  
+import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;  
 import org.springframework.stereotype.Service;  
 import org.springframework.transaction.annotation.Transactional;
@@ -32,13 +33,15 @@ public class VeiculoService implements IVeiculoService{
     }  
   
     @Override  
-    public List<Veiculo> getVeiculoByID(long id) {     	
+    public Veiculo getVeiculoByID(long id) {
         return veiculoRepository.getVeiculoByID(id);  
     }  
   
     @Override  
-    public boolean updateVeiculo(Veiculo veiculo) {  
-        return veiculoRepository.update(veiculo);  
+    public boolean updateVeiculo(Veiculo veiculo) {
+        Date data = new Date();
+        veiculo.setUpdated(data.toString());
+        return veiculoRepository.update(veiculo);
     }
 
     @Override

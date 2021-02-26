@@ -9,7 +9,7 @@ public interface IVeiculoService {
 	public boolean saveVeiculo(Veiculo veiculo);  
     public List<Veiculo> getVeiculos();  
     public boolean deleteVeiculo(Veiculo veiculo);  
-    public List<Veiculo> getVeiculoByID(long id);  
+    public Veiculo getVeiculoByID(long id);
     public boolean updateVeiculo(Veiculo veiculo);
     public int getQtdVeiculosNaoVendidos();
 }

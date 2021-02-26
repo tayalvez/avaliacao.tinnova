@@ -1,5 +1,6 @@
 package com.avaliacao.tinnova.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;  
@@ -50,12 +51,12 @@ public class VeiculoRepository implements IVeiculoRepository{
     }  
   
     @Override  
-    public List<Veiculo> getVeiculoByID(long id) {  
+    public Veiculo getVeiculoByID(long id) {
         Session currentSession = sessionFactory.getCurrentSession();  
         Query<Veiculo> query=currentSession.createQuery("from Veiculo where id=:id", Veiculo.class);  
         query.setParameter("id", id);  
-        List<Veiculo> list=query.getResultList();  
-        return list;  
+        Veiculo veiculo=query.getSingleResult();
+        return veiculo;
     }
 
     @Override
@@ -68,7 +69,7 @@ public class VeiculoRepository implements IVeiculoRepository{
 
     @Override  
     public boolean update(Veiculo veiculo) {  
-        boolean status=false;  
+        boolean status=false;
         try {  
             sessionFactory.getCurrentSession().update(veiculo);  
             status=true;  
